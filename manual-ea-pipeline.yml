@@ -13,14 +13,7 @@ stages:
 #      - badSmellsDetection
 
 transformations:
-  - name: checkoutCentralModel
-    service: git-service
-    command: checkout
-    parameters:
-      repositoryUri: https://github.com/asab-se/centralEaRepository.git
-      branch: master
-
-  - name: checkoutProjectDeviation
+    - name: checkoutProjectDeviation
     service: git-service
     command: checkout
     parameters:
@@ -35,6 +28,13 @@ transformations:
     dependsOn:
       - alias: artifact
         ref: p://this/transformations/checkoutProjectDeviation/workspace
+
+  - name: checkoutCentralModel
+      service: git-service
+      command: checkout
+      parameters:
+        repositoryUri: https://github.com/asab-se/centralEaRepository.git
+        branch: master
 
   - name: computeChangeSet
     service: ea-model-evolution-service
