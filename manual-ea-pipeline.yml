@@ -34,7 +34,7 @@ transformations:
       projectDeviantArtifactId: "@artifact"
     dependsOn:
       - alias: artifact
-        ref: p://this/transformations/checkoutProjectDeviation/projectModel
+        ref: p://this/transformations/checkoutProjectDeviation/workspace
 
   - name: computeChangeSet
     service: ea-model-evolution-service
@@ -44,7 +44,7 @@ transformations:
       alignedModel: "@alignedArtifact"
     dependsOn:
       - alias: centralArtifact
-        ref: p://this/transformations/checkoutCentralModel/centralModel
+        ref: p://this/transformations/checkoutCentralModel/workspace
       - alias: alignedArtifact
         ref: p://this/transformations/alignModelData/alignedModel
 
