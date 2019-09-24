@@ -34,7 +34,7 @@ transformations:
       projectDeviantArtifactId: "@artifact"
     dependsOn:
       - alias: artifact
-        ref: p://this/transformations/checkoutProjectDeviation/workspace
+        ref: p://this/transformations/checkoutProjectDeviation/projectModel
 
   - name: computeChangeSet
     service: ea-model-evolution-service
