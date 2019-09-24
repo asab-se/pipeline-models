@@ -46,7 +46,7 @@ transformations:
       - alias: centralArtifact
         ref: p://this/transformations/checkoutCentralModel/workspace
       - alias: alignedArtifact
-        ref: p://this/transformations/checkoutCentralModel/workspace
+        ref: p://this/transformations/alignModelData/alignedModel
 #
 #assessments:
 #  - name: artifactVerification
