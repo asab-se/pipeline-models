@@ -5,6 +5,12 @@ stages:
       - checkoutProjectDeviation
       - alignModelData
       - computeChangeSet
+      - artifactVerification
+  - name: check model quality
+    transformations:
+      - consistencyCheck
+      - syntaxCheck
+      - badSmellsDetection
 
 transformations:
   - name: checkoutCentralModel
@@ -39,7 +45,8 @@ transformations:
     dependsOn:
       - alias: centralArtifact
         ref: p://this/transformations/checkoutCentralModel/centralModel
-      - alias: p://this/transformations/alignModelData/alignedModel
+      - alias: alignedArtifact
+        ref: p://this/transformations/alignModelData/alignedModel
 
 assessments:
   - name: artifactVerification
