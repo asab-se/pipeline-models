@@ -5,7 +5,7 @@ stages:
       - checkoutProjectDeviation
       - alignModelData
       - computeChangeSet
-#      - artifactVerification
+      - artifactVerification
 #  - name: check model quality
 #    transformations:
 #      - consistencyCheck
@@ -47,28 +47,28 @@ transformations:
         ref: p://this/transformations/checkoutCentralModel/workspace
       - alias: alignedArtifact
         ref: p://this/transformations/alignModelData/alignedModel
-#
-#assessments:
-#  - name: artifactVerification
-#    service: ea-model-evolution-service
-#    command: artifactVerificationAssessment
-#    parameters:
-#      centralModel: "@centralArtifact"
-#      alignedModel: "@alignedArtifact"
-#      changeSet: "@changeSetArtifact"
-#    dependsOn:
-#      - alias: centralArtifact
-#        ref: p://this/transformations/checkoutCentralModel/workspace
-#      - alias: alignedArtifact
-#        ref: p://this/transformations/alignModelData/alignedModel
-#      - alias: changeSetArtifact
-#        ref: p://this/transformations/computeChangeSet/changeSet
-#
-#qualityGates:
-#  - strategy: auto
-#    policies:
-#      - name: ArtifactsValid
-#        interpretation: threshold-
-#        actualValue: numberOfArtifacts
-#        setPoint: 2.1
-#        assessmentRef: p://this/assessments/artifactVerification
+
+assessments:
+  - name: artifactVerification
+    service: ea-model-evolution-service
+    command: artifactVerificationAssessment
+    parameters:
+      centralModel: "@centralArtifact"
+      alignedModel: "@alignedArtifact"
+      changeSet: "@changeSetArtifact"
+    dependsOn:
+      - alias: centralArtifact
+        ref: p://this/transformations/checkoutCentralModel/workspace
+      - alias: alignedArtifact
+        ref: p://this/transformations/alignModelData/alignedModel
+      - alias: changeSetArtifact
+        ref: p://this/transformations/computeChangeSet/changeSet
+
+qualityGates:
+  - strategy: auto
+    policies:
+      - name: ArtifactsValid
+        interpretation: threshold-
+        actualValue: numberOfArtifacts
+        setPoint: 2.1
+        assessmentRef: p://this/assessments/artifactVerification
