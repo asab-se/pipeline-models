@@ -31,10 +31,10 @@ transformations:
     service: ea-model-evolution-service
     command: alignModelData
     parameters:
-      projectDeviantArtifactId: "@artifact"
+      projectModel: "@artifact"
     dependsOn:
       - alias: artifact
-        ref: p://this/transformations/checkoutProjectDeviation/projectModel
+        ref: p://this/transformations/checkoutProjectDeviation/workspace
 
   - name: computeChangeSet
     service: ea-model-evolution-service
@@ -46,7 +46,7 @@ transformations:
       - alias: centralArtifact
         ref: p://this/transformations/checkoutCentralModel/workspace
       - alias: alignedArtifact
-        ref: p://this/transformations/alignModelData/alignedModel
+        ref: p://this/transformations/alignModelData/alignedModelArtifactId
 
 assessments:
   - name: artifactVerification
