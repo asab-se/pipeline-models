@@ -1,9 +1,9 @@
 stages:
   - name: prepareModelData
     transformations:
-      - checkoutCentralModel
       - checkoutProjectDeviation
       - alignModelData
+      - checkoutCentralModel
       - computeChangeSet
       - artifactVerification
 #  - name: check model quality
@@ -13,7 +13,7 @@ stages:
 #      - badSmellsDetection
 
 transformations:
-    - name: checkoutProjectDeviation
+  - name: checkoutProjectDeviation
     service: git-service
     command: checkout
     parameters:
