@@ -4,7 +4,7 @@ stages:
       - checkoutCentralModel
       - checkoutProjectDeviation
       - alignModelData
-#      - computeChangeSet
+      - computeChangeSet
 #      - artifactVerification
 #  - name: check model quality
 #    transformations:
@@ -36,17 +36,17 @@ transformations:
       - alias: artifact
         ref: p://this/transformations/checkoutProjectDeviation/workspace
 
-#  - name: computeChangeSet
-#    service: ea-model-evolution-service
-#    command: computeChangeSet
-#    parameters:
-#      centralModel: "@centralArtifact"
-#      alignedModel: "@alignedArtifact"
-#    dependsOn:
-#      - alias: centralArtifact
-#        ref: p://this/transformations/checkoutCentralModel/workspace
-#      - alias: alignedArtifact
-#        ref: p://this/transformations/alignModelData/alignedModel
+  - name: computeChangeSet
+    service: ea-model-evolution-service
+    command: computeChangeSet
+    parameters:
+      centralModel: "@centralArtifact"
+      alignedModel: "@alignedArtifact"
+    dependsOn:
+      - alias: centralArtifact
+        ref: p://this/transformations/checkoutCentralModel/workspace
+      - alias: alignedArtifact
+        ref: p://this/transformations/alignModelData/alignedModel
 #
 #assessments:
 #  - name: artifactVerification
