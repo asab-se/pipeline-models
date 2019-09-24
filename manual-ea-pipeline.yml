@@ -44,9 +44,9 @@ transformations:
       alignedModel: "@alignedArtifact"
     dependsOn:
       - alias: centralArtifact
-        ref: p://this/transformations/alignModelData/alignedModel
+        ref: p://this/transformations/checkoutCentralModel/workspace
       - alias: alignedArtifact
-        ref: p://this/transformations/alignModelData/alignedModel
+        ref: p://this/transformations/checkoutCentralModel/workspace
 #
 #assessments:
 #  - name: artifactVerification
