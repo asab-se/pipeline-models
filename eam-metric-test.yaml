@@ -1,0 +1,90 @@
+stages:
+  - name: prepareModelData
+    transformations:
+      - checkoutCentralModel
+    assessments:
+      - eamKpiMetrics
+
+transformations:
+  - name: checkoutCentralModel
+    service: git-service
+    command: checkout
+    parameters:
+      repositoryUri: https://github.com/asab-se/centralEaRepository.git
+      branch: master
+
+assessments:
+  - name: eamKpiMetrics
+    service: ea-model-evolution-service
+    command: eamKpiCalculation
+    parameters:
+      changeSetArtifactId: "@centralArtifact"
+      metricProperty:
+        language: ArchiMate
+        languageVersion: 3.0
+        metrics:
+          - name: Application Continuity Plan
+            calculate:
+              operator: devide
+              values:
+                - type: simple
+                  value: value1
+                - type: simple
+                  value: value2
+              #        - type: calculate
+              #          operator: sum
+              #          values:
+              #            - type: simple
+              #              value: value2
+              #            - type: simple
+              #              value: value3
+              valueDefinitions:
+                - id: value1
+                  operator: sum
+                  selector:
+                    id: CRITICAL_APPLICATION
+                    is: Element
+                    ofType: Business Application
+                    where:
+                      - queryType: and
+                        queries:
+                          - queryType: statement
+                            query: "CRITICAL_APPLICATION has CRITICALITY_RATING"
+                            params:
+                              - id: CRITICALITY_RATING
+                                is: Element
+                                ofType: Business Object
+                                where:
+                                  - queryType: and
+                                    queries:
+                                      - queryType: statement
+                                        query: RELATION exists
+                                        params:
+                                          - id: RELATION
+                                            is: Relationship
+                                            ofType: Association
+                                      - queryType: statement
+                                        query: name is "Criticality Rating"
+                - id: value2
+                  operator: sum
+                  selector:
+                    id: ALL_APPLICATIONS
+                    is: Element
+                    ofType: Business Application
+
+            interpret:
+              measure: "%"
+              good:
+                - value: "80"
+                  relation: ">="
+              normal:
+                - relation: ">="
+                  value: "60"
+                - relation: "<"
+                  value: "80"
+              bad:
+                - relation: "<"
+                  value: "60"
+    dependsOn:
+      - alias: centralArtifact
+        ref: p://this/transformations/checkoutCentralModel/changeSetArtifactId
