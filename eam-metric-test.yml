@@ -10,7 +10,7 @@ transformations:
     service: git-service
     command: checkout
     parameters:
-      repositoryUri: https://github.com/asab-se//projectEaRepository.git
+      repositoryUri: https://github.com/asab-se/projectEaRepository
       branch: master
 
   - name: alignModelData
