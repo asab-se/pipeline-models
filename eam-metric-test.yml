@@ -2,8 +2,6 @@ stages:
   - name: prepareModelData
     transformations:
       - checkoutProjectDeviantModel
-    assessments:
-      - calculateKpis
 #      - alignModelData
 #      - checkoutCentralModel
 
