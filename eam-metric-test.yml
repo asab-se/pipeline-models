@@ -21,7 +21,7 @@ transformations:
       threshold: 2
     dependsOn:
       - alias: artifact
-        ref: p://this/transformations/checkoutProjectDeviation/workspace
+        ref: p://this/transformations/checkoutProjectDeviantModel/workspace
 
 #  - name: checkoutCentralModel
 #    service: git-service
