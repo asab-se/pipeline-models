@@ -4,7 +4,7 @@ stages:
       - checkoutProjectDeviation
 
 transformations:
-  - name: checkoutProjectDeviantModel
+  - name: checkoutProjectDeviation
     service: git-service
     command: checkout
     parameters:
@@ -19,7 +19,7 @@ assessments:
       changeSetArtifactId: "@repo"
     dependsOn:
       - alias: repo
-        ref: p://this/transformations/checkoutProjectDeviantModel/workspace
+        ref: p://this/transformations/checkoutProjectDeviation/workspace
 
 qualityGates:
   - strategy: auto
