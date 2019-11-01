@@ -1,0 +1,30 @@
+stages:
+  - name: prepareModelData
+    transformations:
+      - checkoutProjectDeviation
+
+transformations:
+  - name: checkoutProjectDeviantModel
+    service: git-service
+    command: checkout
+    parameters:
+      repositoryUri: https://github.com/asab-se/projectEaRepository
+      branch: master
+
+assessments:
+  - name: syntaxCheck
+    service: ea-model-evolution-service
+    command: syntaxCheckAssessment
+    parameters:
+      changeSetArtifactId: "@repo"
+    dependsOn:
+      - alias: repo
+        ref: p://this/transformations/checkoutProjectDeviantModel/workspace
+
+qualityGates:
+  - strategy: auto
+    policies:
+      - name: SyntaxValid
+        interpretation: boolean
+        actualValue: isValid
+        assessmentRef: p://this/assessments/syntaxCheck
