@@ -32,7 +32,7 @@ transformations:
 assessments:
   - name: calculateKpis
     service: ea-model-evolution-service
-    command: eamKpiCalculation
+    command: eamKpiCalculationAssessment
     parameters:
       changeSetArtifactId: "@artifact"
       metricProperty:
