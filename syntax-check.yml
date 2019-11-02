@@ -25,7 +25,7 @@ qualityGates:
   - strategy: auto
     policies:
       - name: SyntaxValid
-        interpretation: boolean
-        actualValue: isValid
+        interpretation: threshold+
+        actualValue: 0.5
         setPoint: true
         assessmentRef: p://this/assessments/syntaxCheck
