@@ -16,7 +16,7 @@ assessments:
     service: ea-model-evolution-service
     command: syntaxCheckAssessment
     parameters:
-      changeSetArtifactId: "@repo"
+      changeSet: "@repo"
     dependsOn:
       - alias: repo
         ref: p://this/transformations/checkoutProjectDeviation/workspace
@@ -24,7 +24,7 @@ assessments:
 qualityGates:
   - strategy: auto
     policies:
-      - name: SyntaxValid
+      - name: SyntaxValidation
         interpretation: threshold+
         actualValue: isValid
         setPoint: 0.5

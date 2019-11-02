@@ -10,14 +10,14 @@ transformations:
     service: git-service
     command: checkout
     parameters:
-      repositoryUri: https://github.com/asab-se/projectEaRepository
+      repositoryUri: https://github.com/asab-se/centralEaRepository
       branch: master
 
   - name: checkoutProjectDeviantModel
     service: git-service
     command: checkout
     parameters:
-      repositoryUri: https://github.com/asab-se/centralEaRepository
+      repositoryUri: https://github.com/asab-se/projectEaRepository
       branch: master
 
   - name: computeChangeSet
