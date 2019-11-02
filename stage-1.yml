@@ -1,0 +1,69 @@
+stages:
+  - name: prepareModelData
+    transformations:
+      - checkoutCentralModel
+      - checkoutProjectDeviantModel
+      - alignModelData
+      - computeChangeSet
+
+transformations:
+  - name: checkoutCentralModel
+    service: git-service
+    command: checkout
+    parameters:
+      repositoryUri: https://github.com/asab-se/centralEaRepository
+      branch: master
+
+  - name: checkoutProjectDeviantModel
+    service: git-service
+    command: checkout
+    parameters:
+      repositoryUri: https://github.com/asab-se/projectEaRepository
+      branch: master
+
+  - name: alignModelData
+    service: ea-model-evolution-service
+    command: alignModelData
+    parameters:
+      projectDeviantArtifactId: "@projectDeviant"
+      threshold: "2"
+    dependsOn:
+      - alias: projectDeviant
+        ref: p://this/transformations/checkoutProjectDeviantModel/workspace
+
+  - name: computeChangeSet
+    service: ea-model-evolution-service
+    command: computeChangeSet
+    parameters:
+      centralModel: "@central"
+      alignedModel: "@aligned"
+    dependsOn:
+      - alias: central
+        ref: p://this/transformations/checkoutCentralModel/workspace
+      - alias: aligned
+        ref: p://this/transformations/alignModelData/alignModelArtifactId
+
+assessments:
+  - name: artifactVerification
+    service: ea-model-evolution-service
+    command: artifactVerificationAssessment
+    parameters:
+      alignedModel: "@alignedModel"
+      centralModel: "@centralModel"
+      changeSet: "@changeSet"
+    dependsOn:
+      - alias: alignedModel
+        ref: p://this/transformations/alignModelData/alignModelArtifactId
+      - alias: centralModel
+        ref: p://this/transformations/checkoutCentralModel/workspace
+      - alias: changeSet
+        ref: p://this/transformations/computeChangeSet/changeSetArtifactId
+
+qualityGates:
+  - strategy: auto
+    policies:
+      - name: VerifyArtifactExistence
+        interpretation: threshold-
+        actualValue: numberOfArtifacts
+        setPoint: 3
+        assessmentRef: p://this/assessments/artifactVerification
