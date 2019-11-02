@@ -27,4 +27,5 @@ qualityGates:
       - name: SyntaxValid
         interpretation: boolean
         actualValue: isValid
+        setPoint: true
         assessmentRef: p://this/assessments/syntaxCheck
