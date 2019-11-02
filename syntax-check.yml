@@ -26,6 +26,6 @@ qualityGates:
     policies:
       - name: SyntaxValid
         interpretation: threshold+
-        actualValue: 0.5
-        setPoint: true
+        actualValue: isValid
+        setPoint: 0.5
         assessmentRef: p://this/assessments/syntaxCheck
