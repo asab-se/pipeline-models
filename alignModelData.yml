@@ -4,7 +4,6 @@ stages:
       - checkoutCentralModel
       - checkoutProjectDeviantModel
       - alignModelData
-      - computeChangeSet
 
 transformations:
   - name: checkoutCentralModel
