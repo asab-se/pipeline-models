@@ -1,0 +1,189 @@
+stages:
+  - name: prepareModelData
+    transformations:
+      - checkoutCentralModel
+      - checkoutProjectDeviantModel
+      - alignModelData
+      - computeChangeSet
+  - name: testAndAssess
+
+transformations:
+  - name: checkoutCentralModel
+    service: git-service
+    command: checkout
+    parameters:
+      repositoryUri: https://github.com/asab-se/centralEaRepository
+      branch: master
+
+  - name: checkoutProjectDeviantModel
+    service: git-service
+    command: checkout
+    parameters:
+      repositoryUri: https://github.com/asab-se/projectEaRepository
+      branch: master
+
+  - name: alignModelData
+    service: ea-model-evolution-service
+    command: alignModelData
+    parameters:
+      projectDeviantArtifactId: "@projectDeviant"
+      threshold: "2"
+    dependsOn:
+      - alias: projectDeviant
+        ref: p://this/transformations/checkoutProjectDeviantModel/workspace
+
+  - name: computeChangeSet
+    service: ea-model-evolution-service
+    command: computeChangeSet
+    parameters:
+      centralModel: "@central"
+      alignedModel: "@aligned"
+    dependsOn:
+      - alias: central
+        ref: p://this/transformations/checkoutCentralModel/workspace
+      - alias: aligned
+        ref: p://this/transformations/alignModelData/alignModelArtifactId
+
+assessments:
+  - name: artifactVerification
+    service: ea-model-evolution-service
+    command: artifactVerificationAssessment
+    parameters:
+      alignedModel: "@alignedModel"
+      centralModel: "@centralModel"
+      changeSet: "@changeSet"
+    dependsOn:
+      - alias: alignedModel
+        ref: p://this/transformations/alignModelData/alignModelArtifactId
+      - alias: centralModel
+        ref: p://this/transformations/checkoutCentralModel/workspace
+      - alias: changeSet
+        ref: p://this/transformations/computeChangeSet/changeSetArtifactId
+
+  - name: syntaxCheckAssessment
+    service: ea-model-evolution-service
+    command: syntaxCheckAssessment
+    parameters:
+      changeSet: "$changeSet"
+      projectDeviantArtifactId: "$projectModel"
+    dependsOn:
+      - alias: changeSet
+        ref: p://this/transformations/computeChangeSet/changeSetArtifactId
+      - alias: projectModel
+        ref: p://this/transformations/checkoutProjectDeviantModel/workspace
+
+  - name: consistencyCheckAssessment
+    service: ea-model-evolution-service
+    command: consistencyCheckAssessment
+    parameters:
+      changeSet: "$changeSet"
+    dependsOn:
+      - alias: changeSet
+        ref: p://this/transformations/computeChangeSet/changeSetArtifactId
+
+  - name: calculateKpis
+    service: ea-model-evolution-service
+    command: eamKpiCalculationAssessment
+    parameters:
+      changeSetArtifactId: "@changeSet"
+      metricProperty:
+        language: ArchiMate
+        languageVersion: 3.0
+        metrics:
+          - name: Application Continuity Plan
+            calculate:
+              operator: devide
+              values:
+                - type: simple
+                  value: value1
+                - type: simple
+                  value: value2
+              valueDefinitions:
+                - id: value1
+                  operator: sum
+                  selector:
+                    id: CRITICAL_APPLICATION
+                    is: Element
+                    ofType: Business Application
+                    where:
+                      - queryType: and
+                        queries:
+                          - queryType: statement
+                            query: "CRITICAL_APPLICATION has CRITICALITY_RATING"
+                            params:
+                              - id: CRITICALITY_RATING
+                                is: Element
+                                ofType: Business Object
+                                where:
+                                  - queryType: and
+                                    queries:
+                                      - queryType: statement
+                                        query: RELATION exists
+                                        params:
+                                          - id: RELATION
+                                            is: Relationship
+                                            ofType: Association
+                                      - queryType: statement
+                                        query: name is "Criticality Rating"
+                - id: value2
+                  operator: sum
+                  selector:
+                    id: ALL_APPLICATIONS
+                    is: Element
+                    ofType: Business Application
+
+            interpret:
+              measure: "%"
+              good:
+                - value: "80"
+                  relation: ">="
+              normal:
+                - relation: ">="
+                  value: "60"
+                - relation: "<"
+                  value: "80"
+              bad:
+                - relation: "<"
+                  value: "60"
+    dependsOn:
+      - alias: changeSet
+        ref: p://this/transformations/computeChangeSet/changeSetArtifactId
+
+qualityGates:
+  - strategy: auto
+    policies:
+      - name: VerifyArtifactExistence
+        interpretation: threshold-
+        actualValue: numberOfArtifacts
+        setPoint: 3
+        assessmentRef: p://this/assessments/artifactVerification
+
+      - name: VerifySyntax
+        interpretation: threshold-
+        actualValue: isValid
+        setPoint: 0.5
+        assessmentRef: p://this/assessments/syntaxCheckAssessment
+
+      - name: VerifyConsistency
+        interpretation: threshold-
+        actualValue: isValid
+        setPoint: 0.5
+        assessmentRef: p://this/assessments/consistencyCheckAssessment
+
+      - name: VerifyBadMetrics
+        interpretation: threshold-
+        actualValue: numberOfBadKpis
+        setPoint: 1
+        assessmentRef: p://this/assessments/calculateKpis
+
+      - name: VerifyAverageMetrics
+        interpretation: threshold-
+        actualValue: numberOfAverageKpis
+        setPoint: 5
+        assessmentRef: p://this/assessments/calculateKpis
+
+      - name: VerifyGoodMetrics
+        interpretation: threshold-
+        actualValue: numberOfGoodKpis
+        setPoint: 10
+        assessmentRef: p://this/assessments/calculateKpis
