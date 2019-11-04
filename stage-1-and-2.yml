@@ -72,14 +72,14 @@ assessments:
       - alias: projectModel
         ref: p://this/transformations/checkoutProjectDeviantModel/workspace
 
-#  - name: consistencyCheckAssessment
-#    service: ea-model-evolution-service
-#    command: consistencyCheckAssessment
-#    parameters:
-#      changeSet: "@changeSet"
-#    dependsOn:
-#      - alias: changeSet
-#        ref: p://this/transformations/computeChangeSet/changeSetArtifactId
+  - name: consistencyCheckAssessment
+    service: ea-model-evolution-service
+    command: consistencyCheckAssessment
+    parameters:
+      changeSet: "@changeSet"
+    dependsOn:
+      - alias: changeSet
+        ref: p://this/transformations/computeChangeSet/changeSetArtifactId
 
   - name: calculateKpis
     service: ea-model-evolution-service
@@ -209,11 +209,11 @@ qualityGates:
         setPoint: 0.5
         assessmentRef: p://this/assessments/syntaxCheckAssessment
 
-#      - name: VerifyConsistency
-#        interpretation: threshold-
-#        actualValue: isValid
-#        setPoint: 0.5
-#        assessmentRef: p://this/assessments/consistencyCheckAssessment
+      - name: VerifyConsistency
+        interpretation: threshold-
+        actualValue: isValid
+        setPoint: 0.5
+        assessmentRef: p://this/assessments/consistencyCheckAssessment
 
       - name: VerifyBadMetrics
         interpretation: threshold+
