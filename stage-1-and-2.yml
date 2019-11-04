@@ -64,8 +64,8 @@ assessments:
     service: ea-model-evolution-service
     command: syntaxCheckAssessment
     parameters:
-      changeSet: "$changeSet"
-      projectDeviantArtifactId: "$projectModel"
+      changeSet: "@changeSet"
+      projectDeviantArtifactId: "@projectModel"
     dependsOn:
       - alias: changeSet
         ref: p://this/transformations/computeChangeSet/changeSetArtifactId
@@ -76,7 +76,7 @@ assessments:
     service: ea-model-evolution-service
     command: consistencyCheckAssessment
     parameters:
-      changeSet: "$changeSet"
+      changeSet: "@changeSet"
     dependsOn:
       - alias: changeSet
         ref: p://this/transformations/computeChangeSet/changeSetArtifactId
