@@ -1,0 +1,32 @@
+stages:
+  - name: prepareModelData
+    transformations:
+      - checkoutCentralModel
+      - checkoutProjectDeviantModel
+      - alignModelData
+      - computeChangeSet
+
+transformations:
+  - name: checkoutCentralModel
+    service: git-service
+    command: checkout
+    parameters:
+      repositoryUri: https://github.com/asab-se/centralEaRepository
+      branch: master
+
+  - name: checkoutProjectDeviantModel
+    service: git-service
+    command: checkout
+    parameters:
+      repositoryUri: https://github.com/asab-se/projectEaRepository
+      branch: master
+
+  - name: alignModelData
+    service: ea-model-evolution-service
+    command: alignModelData
+    parameters:
+      projectDeviantArtifactId: "@projectDeviant"
+      threshold: "2"
+    dependsOn:
+      - alias: projectDeviant
+        ref: p://this/transformations/checkoutProjectDeviantModel/workspace
