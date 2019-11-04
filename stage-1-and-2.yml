@@ -216,19 +216,19 @@ qualityGates:
 #        assessmentRef: p://this/assessments/consistencyCheckAssessment
 
       - name: VerifyBadMetrics
-        interpretation: threshold-
+        interpretation: threshold+
         actualValue: numberOfBadKpis
-        setPoint: 1
+        setPoint: 0.1
         assessmentRef: p://this/assessments/calculateKpis
 
-      - name: VerifyAverageMetrics
-        interpretation: threshold-
-        actualValue: numberOfAverageKpis
-        setPoint: 5
-        assessmentRef: p://this/assessments/calculateKpis
-
-      - name: VerifyGoodMetrics
-        interpretation: threshold-
-        actualValue: numberOfGoodKpis
-        setPoint: 10
-        assessmentRef: p://this/assessments/calculateKpis
+  #    - name: VerifyAverageMetrics
+  #      interpretation: threshold-
+  #      actualValue: numberOfAverageKpis
+  #      setPoint: 5
+  #      assessmentRef: p://this/assessments/calculateKpis
+#
+  #    - name: VerifyGoodMetrics
+  #      interpretation: threshold-
+  #      actualValue: numberOfGoodKpis
+  #      setPoint: 10
+  #      assessmentRef: p://this/assessments/calculateKpis
