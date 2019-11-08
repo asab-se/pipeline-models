@@ -51,6 +51,7 @@ transformations:
     command: testAndAssessCheckout
     parameters:
       changeSet: "@changeSet"
+      numberOfArtifacts: "@numberOfArtifacts"
     dependsOn:
       - alias: changeSet
         ref: p://this/transformations/computeChangeSet/changeSetArtifactId
