@@ -17,6 +17,7 @@ assessments:
     command: syntaxCheckAssessment
     parameters:
       changeSet: "@repo"
+      projectDeviantArtifactId: "@repo"
     dependsOn:
       - alias: repo
         ref: p://this/transformations/checkoutProjectDeviation/workspace
