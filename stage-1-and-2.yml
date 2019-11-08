@@ -6,6 +6,7 @@ stages:
       - alignModelData
       - computeChangeSet
   - name: testAndAssess
+    transformations:
       - testAndAssessCheckout
 
 transformations:
