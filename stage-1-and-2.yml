@@ -6,6 +6,7 @@ stages:
       - alignModelData
       - computeChangeSet
   - name: testAndAssess
+      - testAndAssessCheckout
 
 transformations:
   - name: checkoutCentralModel
@@ -44,6 +45,15 @@ transformations:
       - alias: aligned
         ref: p://this/transformations/alignModelData/alignModelArtifactId
 
+  - name: testAndAssessCheckout
+    service: ea-model-evolution-service
+    command: testAndAssessCheckout
+    parameters:
+      changeSet: "@changeSet"
+    dependsOn:
+      - alias: changeSet
+        ref: p://this/transformations/computeChangeSet/changeSetArtifactId
+
 assessments:
   - name: artifactVerification
     service: ea-model-evolution-service
@@ -68,7 +78,7 @@ assessments:
       projectDeviantArtifactId: "@projectModel"
     dependsOn:
       - alias: changeSet
-        ref: p://this/transformations/computeChangeSet/changeSetArtifactId
+        ref: p://this/transformations/testAndAssessCheckout/changeSetArtifactId
       - alias: projectModel
         ref: p://this/transformations/checkoutProjectDeviantModel/workspace
 
@@ -79,7 +89,7 @@ assessments:
       changeSet: "@changeSet"
     dependsOn:
       - alias: changeSet
-        ref: p://this/transformations/computeChangeSet/changeSetArtifactId
+        ref: p://this/transformations/testAndAssessCheckout/changeSetArtifactId
 
   - name: calculateKpis
     service: ea-model-evolution-service
@@ -192,7 +202,7 @@ assessments:
                   value: "0.6"
     dependsOn:
       - alias: changeSet
-        ref: p://this/transformations/computeChangeSet/changeSetArtifactId
+        ref: p://this/transformations/testAndAssessCheckout/changeSetArtifactId
 
 qualityGates:
   - strategy: auto
