@@ -75,8 +75,8 @@ assessments:
     service: ea-model-evolution-service
     command: syntaxCheckAssessment
     parameters:
-      changeSet: "@changeSet"
-      projectDeviantArtifactId: "@projectModel"
+      checkedModel: "@changeSet"
+      repoWithSchemaFile: "@projectModel"
     dependsOn:
       - alias: changeSet
         ref: p://this/transformations/testAndAssessCheckout/changeSetArtifactId
@@ -87,7 +87,7 @@ assessments:
     service: ea-model-evolution-service
     command: consistencyCheckAssessment
     parameters:
-      changeSet: "@changeSet"
+      checkedModel: "@changeSet"
     dependsOn:
       - alias: changeSet
         ref: p://this/transformations/testAndAssessCheckout/changeSetArtifactId
@@ -96,7 +96,7 @@ assessments:
     service: ea-model-evolution-service
     command: eamKpiCalculationAssessment
     parameters:
-      changeSetArtifactId: "@changeSet"
+      checkedModel: "@changeSet"
       metricProperty:
         language: ArchiMate
         languageVersion: 3.0
