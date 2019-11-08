@@ -54,6 +54,8 @@ transformations:
     dependsOn:
       - alias: changeSet
         ref: p://this/transformations/computeChangeSet/changeSetArtifactId
+      - alias: numberOfArtifacts
+        ref: p://this/assessments/artifactVerification
 
 assessments:
   - name: artifactVerification
