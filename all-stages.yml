@@ -65,14 +65,14 @@ transformations:
     parameters:
       centralModel: "@centralModel"
       changeSet: "@changeSet"
-      metricsReportArtifact: "@metricsReportArtifact"
+      #metricsReportArtifact: "@metricsReportArtifact"
     dependsOn:
       - alias: centralModel
         ref: p://this/transformations/checkoutCentralModel/workspace
       - alias: changeSet
         ref: p://this/assessments/artifactVerification/changeSet
-      - alias: metricsReportArtifact
-        ref: p://this/assessments/calculateKpis/metricsReportArtifact
+      #- alias: metricsReportArtifact
+      #  ref: p://this/assessments/calculateKpis/metricsReportArtifact
 
 assessments:
   - name: artifactVerification
