@@ -132,6 +132,15 @@ assessments:
       - alias: mergedModel
         ref: p://this/transformations/mergeModels/mergedModel
 
+    - name: disconnectedComponentsCheck
+      service: ea-model-evolution-service
+      command: disconnectedComponentsCheck
+      parameters:
+        checkedModel: "@mergedModel"
+      dependsOn:
+        - alias: mergedModel
+          ref: p://this/transformations/mergeModels/mergedModel
+
   - name: calculateKpis
     service: ea-model-evolution-service
     command: eamKpiCalculationAssessment
@@ -411,6 +420,12 @@ qualityGates:
         actualValue: numberOfBadKpis
         setPoint: 0.1
         assessmentRef: p://this/assessments/mergedCalculateKpis
+
+      - name: VerifyDisconnectedComponents
+        interpretation: threshold-
+        actualValue: isValid
+        setPoint: 0.5
+        assessments: p://this/assessments/disconnectedComponentsCheck
 
   #    - name: VerifyAverageMetrics
   #      interpretation: threshold-
