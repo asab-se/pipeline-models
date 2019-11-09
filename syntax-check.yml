@@ -16,8 +16,8 @@ assessments:
     service: ea-model-evolution-service
     command: syntaxCheckAssessment
     parameters:
-      changeSet: "@repo"
-      projectDeviantArtifactId: "@repo"
+      checkedModel: "@repo"
+      repoWithSchemaFile: "@repo"
     dependsOn:
       - alias: repo
         ref: p://this/transformations/checkoutProjectDeviation/workspace
