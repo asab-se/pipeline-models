@@ -404,8 +404,8 @@ qualityGates:
         assessmentRef: p://this/assessments/mergedConsistencyCheckAssessment
 
       - name: VerifyMergedBadMetrics
-      actualValue: numberOfBadKpis
         interpretation: threshold+
+        actualValue: numberOfBadKpis
         setPoint: 0.1
         assessmentRef: p://this/assessments/mergedCalculateKpis
 
