@@ -98,9 +98,9 @@ assessments:
       repoWithSchemaFile: "@projectModel"
     dependsOn:
       - alias: changeSet
-        ref: p://this/transformations/checkoutCentralModel/workspace
+        ref: p://this/transformations/testAndAssessCheckout/changeSetArtifactId
       - alias: projectModel
-        ref: p://this/transformations/checkoutProjectDeviantModel/workspace
+        ref: p://this/transformations/checkoutCentralModel/workspace
 
   - name: mergedSyntaxCheckAssessment
     service: ea-model-evolution-service
@@ -110,9 +110,9 @@ assessments:
       repoWithSchemaFile: "@projectModel"
     dependsOn:
       - alias: mergedModel
-        ref: p://this/transformations/checkoutCentralModel/workspace
+        ref: p://this/transformations/mergeModels/mergedModel
       - alias: projectModel
-        ref: p://this/transformations/checkoutProjectDeviantModel/workspace
+        ref: p://this/transformations/checkoutCentralModel/workspace
 
   - name: consistencyCheckAssessment
     service: ea-model-evolution-service
