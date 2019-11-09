@@ -98,7 +98,7 @@ assessments:
       repoWithSchemaFile: "@projectModel"
     dependsOn:
       - alias: changeSet
-        ref: p://this/transformations/testAndAssessCheckout/changeSetArtifactId
+        ref: p://this/transformations/checkoutCentralModel/workspace
       - alias: projectModel
         ref: p://this/transformations/checkoutProjectDeviantModel/workspace
 
@@ -110,7 +110,7 @@ assessments:
       repoWithSchemaFile: "@projectModel"
     dependsOn:
       - alias: mergedModel
-        ref: p://this/transformations/mergeModels/mergedModel
+        ref: p://this/transformations/checkoutCentralModel/workspace
       - alias: projectModel
         ref: p://this/transformations/checkoutProjectDeviantModel/workspace
 
@@ -385,7 +385,7 @@ qualityGates:
       - name: VerifyBadMetrics
         interpretation: threshold+
         actualValue: numberOfBadKpis
-        setPoint: 0.1
+        setPoint: -1.0
         assessmentRef: p://this/assessments/calculateKpis
 
       - name: VerifyArtifactExistence
