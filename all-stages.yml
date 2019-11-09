@@ -394,7 +394,7 @@ qualityGates:
       - name: VerifyBadMetrics
         interpretation: threshold+
         actualValue: numberOfBadKpis
-        setPoint: -1.0
+        setPoint: 5
         assessmentRef: p://this/assessments/calculateKpis
 
       - name: VerifyArtifactExistence
