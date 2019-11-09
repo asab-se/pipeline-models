@@ -70,6 +70,8 @@ transformations:
         ref: p://this/transformations/checkoutCentralModel/workspace
       - alias: changeSet
         ref: p://this/assessments/artifactVerification/changeSet
+      - alias: asdf
+        ref: p://this/assessments/calculateKpis/numberOfBadKpis
 
 assessments:
   - name: artifactVerification
