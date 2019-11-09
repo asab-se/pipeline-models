@@ -66,7 +66,7 @@ transformations:
       centralModel: "@centralModel"
       changeSet: "@changeSet"
     dependsOn:
-      - alias: central
+      - alias: centralModel
         ref: p://this/transformations/checkoutCentralModel/workspace
       - alias: changeSet
         ref: p://this/assessments/artifactVerification/changeSet
