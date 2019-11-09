@@ -425,7 +425,7 @@ qualityGates:
         interpretation: threshold-
         actualValue: isValid
         setPoint: 0.5
-        assessments: p://this/assessments/disconnectedComponentsCheck
+        assessmentRef: p://this/assessments/disconnectedComponentsCheck
 
   #    - name: VerifyAverageMetrics
   #      interpretation: threshold-
