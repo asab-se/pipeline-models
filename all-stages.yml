@@ -132,14 +132,14 @@ assessments:
       - alias: mergedModel
         ref: p://this/transformations/mergeModels/mergedModel
 
-    - name: disconnectedComponentsCheck
-      service: ea-model-evolution-service
-      command: disconnectedComponentsCheck
-      parameters:
-        checkedModel: "@mergedModel"
-      dependsOn:
-        - alias: mergedModel
-          ref: p://this/transformations/mergeModels/mergedModel
+  - name: disconnectedComponentsCheck
+    service: ea-model-evolution-service
+    command: disconnectedComponentsCheck
+    parameters:
+      checkedModel: "@mergedModel"
+    dependsOn:
+      - alias: mergedModel
+        ref: p://this/transformations/mergeModels/mergedModel
 
   - name: calculateKpis
     service: ea-model-evolution-service
