@@ -136,7 +136,7 @@ assessments:
     service: ea-model-evolution-service
     command: disconnectedComponentsCheck
     parameters:
-      checkedModel: "@mergedModel"
+      mergedModel: "@mergedModel"
     dependsOn:
       - alias: mergedModel
         ref: p://this/transformations/mergeModels/mergedModel
