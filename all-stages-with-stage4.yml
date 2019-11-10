@@ -11,6 +11,10 @@ stages:
   - name: evolve
     transformations:
       - mergeModels
+  - name: approve
+    transformations:
+      - createReport
+      - sendReport
 
 
 transformations:
@@ -73,6 +77,44 @@ transformations:
         ref: p://this/assessments/artifactVerification/changeSet
       - alias: metricsReportArtifact
         ref: p://this/assessments/calculateKpis/metricsReportArtifact
+
+  - name: createReport
+    service: ea-model-evolution-service
+    command: prepareUpdateReport
+    parameters:
+      alignedModel: "@aligned"
+      changeSet: "@changeSet"
+      mergedModel: "@merged"
+      syntaxCheckReport: "@changeSetSyntax"
+      mergedSyntaxCheckReport: "@mergedSyntax"
+      consistencyCheckReport: "@changeSetConsistency"
+      mergedConsistencyCheckReport:  "@mergedConsistency"
+      metricsReport: "@changeSetMetrics"
+      mergedMetricsReport: "@mergesMetrics"
+      disconnectedComponentsCheckReport: "@disconnected"
+    dependsOn:
+      - alias: aligned
+        ref: p://this/transformations/alignModelData/alignModelArtifactId
+      - alias: changeSet
+        ref: p://this/assessments/artifactVerification/changeSet
+      - alias: merged
+        ref: p://this/transformations/mergeModels/mergedModel
+      - alias: changeSetSyntax
+        ref: p://this/assessments/syntaxCheckAssessment/syntaxCheckReport
+      - alias: mergedSyntax
+        ref: p://this/assessments/mergedSyntaxCheckAssessment/syntaxCheckReport
+      - alias: changeSetConsistency
+        ref: p://this/assessments/consistencyCheckAssessment/consistencyCheckReport
+      - alias: mergedConsistency
+        ref: p://this/assessments/mergedConsistencyCheckAssessment/consistencyCheckReport
+      - alias: changeSetMetrics
+        ref: p://this/assessments/calculateKpis/metricsReportArtifact
+      - alias: mergesMetrics
+        ref: p://this/assessments/mergedCalculateKpis/metricsReportArtifact
+      - alias: disconnected
+        ref: p://this/assessments/disconnectedComponentsCheck/disconnectedComponentsCheckReport
+
+
 
 assessments:
   - name: artifactVerification
