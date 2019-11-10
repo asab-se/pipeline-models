@@ -438,15 +438,16 @@ assessments:
       - alias: mergedModel
         ref: p://this/transformations/mergeModels/mergedModel
 
-  - name: collectApprovals
-    service: ea-model-evolution-service
-    command: collectApprovals
-    parameters:
-      reportDocument: "@reportDocument"
-      timeoutInMinutes: 10
-    dependsOn:
-      - alias: reportDocument
-        ref: p//this/transformations/sendReport/reportDocument
+#  - name: collectApprovals
+#    service: ea-model-evolution-service
+#    command: collectApprovals
+#    parameters:
+#      reportDocument: "@reportDocument"
+#      timeoutInMinutes: 10
+#    dependsOn:
+#      - alias: reportDocument
+#        ref: p//this/transformations/sendReport/reportDocument
+
 
 qualityGates:
   - strategy: auto
@@ -462,6 +463,18 @@ qualityGates:
         actualValue: isValid
         setPoint: 0.5
         assessmentRef: p://this/assessments/syntaxCheckAssessment
+
+      - name: VerifyConsistency
+        interpretation: threshold-
+        actualValue: isValid
+        setPoint: 0.5
+        assessmentRef: p://this/assessments/consistencyCheckAssessment
+
+      - name: VerifyBadMetrics
+        interpretation: threshold+
+        actualValue: numberOfBadKpis
+        setPoint: 5
+        assessmentRef: p://this/assessments/calculateKpis
 
       - name: VerifyArtifactExistence
         interpretation: threshold-
@@ -492,3 +505,21 @@ qualityGates:
         actualValue: isValid
         setPoint: 0.5
         assessmentRef: p://this/assessments/disconnectedComponentsCheck
+
+#      - name: VerifyApprovals
+#        interpretation: threshold-
+#        actualValue: isApproved
+#        setPoint: 0.5
+#        assessmentRef: p://this/assessments/collectApprovals
+
+  #    - name: VerifyAverageMetrics
+  #      interpretation: threshold-
+  #      actualValue: numberOfAverageKpis
+  #      setPoint: 5
+  #      assessmentRef: p://this/assessments/calculateKpis
+#
+  #    - name: VerifyGoodMetrics
+  #      interpretation: threshold-
+  #      actualValue: numberOfGoodKpis
+  #      setPoint: 10
+  #      assessmentRef: p://this/assessments/calculateKpis
