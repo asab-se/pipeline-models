@@ -438,7 +438,15 @@ assessments:
       - alias: mergedModel
         ref: p://this/transformations/mergeModels/mergedModel
 
-
+  - name: collectApprovals
+    service: ea-model-evolution-service
+    command: collectApprovals
+    parameters:
+      reportDocument: "@reportDocument"
+      timeoutInMinutes: 10
+    dependsOn:
+      - alias: reportDocument
+        ref: p//this/transformations/sendReport/reportDocument
 
 
 qualityGates:
@@ -497,6 +505,12 @@ qualityGates:
         actualValue: isValid
         setPoint: 0.5
         assessmentRef: p://this/assessments/disconnectedComponentsCheck
+
+      - name: VerifyApprovals
+        interpretation: threshold-
+        actualValue: isApproved
+        setPoint: 0.5
+        assessmentRef: p://this/assessments/collectApprovals
 
   #    - name: VerifyAverageMetrics
   #      interpretation: threshold-
