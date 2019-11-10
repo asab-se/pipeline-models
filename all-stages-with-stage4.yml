@@ -463,18 +463,6 @@ qualityGates:
         setPoint: 0.5
         assessmentRef: p://this/assessments/syntaxCheckAssessment
 
-      - name: VerifyConsistency
-        interpretation: threshold-
-        actualValue: isValid
-        setPoint: 0.5
-        assessmentRef: p://this/assessments/consistencyCheckAssessment
-
-      - name: VerifyBadMetrics
-        interpretation: threshold+
-        actualValue: numberOfBadKpis
-        setPoint: 5
-        assessmentRef: p://this/assessments/calculateKpis
-
       - name: VerifyArtifactExistence
         interpretation: threshold-
         actualValue: numberOfArtifacts
