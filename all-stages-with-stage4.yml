@@ -438,6 +438,16 @@ assessments:
       - alias: mergedModel
         ref: p://this/transformations/mergeModels/mergedModel
 
+  - name: collectApprovals
+    service: ea-model-evolution-service
+    command: collectApprovals
+    parameters:
+      reportDocument: "@reportDocument"
+      timeoutInMinutes: 10
+    dependsOn:
+      - alias: reportDocument
+        ref: p//this/transformations/sendReport/reportDocument
+
 qualityGates:
   - strategy: auto
     policies:
