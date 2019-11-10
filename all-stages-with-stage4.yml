@@ -505,11 +505,11 @@ qualityGates:
         setPoint: 0.5
         assessmentRef: p://this/assessments/disconnectedComponentsCheck
 
-#      - name: VerifyApprovals
-#        interpretation: threshold-
-#        actualValue: isApproved
-#        setPoint: 0.5
-#        assessmentRef: p://this/assessments/collectApprovals
+      - name: VerifyApprovals
+        interpretation: threshold-
+        actualValue: isApproved
+        setPoint: 0.5
+        assessmentRef: p://this/assessments/collectApprovals
 
   #    - name: VerifyAverageMetrics
   #      interpretation: threshold-
