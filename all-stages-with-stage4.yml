@@ -468,6 +468,12 @@ qualityGates:
         setPoint: 5
         assessmentRef: p://this/assessments/calculateKpis
 
+      - name: VerifyArtifactExistence
+        interpretation: threshold-
+        actualValue: numberOfArtifacts
+        setPoint: 3
+        assessmentRef: p://this/assessments/artifactVerification
+
       - name: VerifyMergedSyntax
         interpretation: threshold-
         actualValue: isValid
