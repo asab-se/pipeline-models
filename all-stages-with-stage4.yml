@@ -114,6 +114,35 @@ transformations:
       - alias: disconnected
         ref: p://this/assessments/disconnectedComponentsCheck/disconnectedComponentsCheckReport
 
+  - name: sendReport
+    service: ea-model-evolution-service
+    command: sendUpdateReport
+    parameters:
+      updateReport: "@report"
+      responsibility:
+        responsibilities:
+          - userMail: alex@asab-se.de
+            userRoles:
+              - project: ProjectA
+                role: admin
+              - project: ProjectB
+                role: manager
+          - userMail: alex.sabau@rwth-aachen.de
+            userRoles:
+              - project: ProjectA
+                role: manager
+      receivers:
+        mailReceivers:
+          - project: ProjectA
+            receiveMail:
+              - admin
+              - manager
+            approveReport:
+              - admin
+      skipMailSending: false
+    dependsOn:
+      - alias: report
+        ref: p://this/transformations/createReport/updateReport
 
 
 assessments:
