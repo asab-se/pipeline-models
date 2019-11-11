@@ -43,6 +43,7 @@ transformations:
       repositoryUri: https://github.com/asab-se/backupEaRepository
       branch: master
       credentials:
+        type: plain
         username: eapipeline-user
         password: c66132e56c61cf8c8c2d91e5
     dependsOn:
