@@ -249,7 +249,7 @@ assessments:
     command: eamKpiCalculationAssessment
     parameters:
       checkedModel: "@changeSet"
-      syntaxCheckReport: "@syntaxCheck"
+      syntaxCheckReport: "@syntaxCheckReport"
       consistencyCheckReport: "@consistencyCheckReport"
       metricProperty:
         language: ArchiMate
