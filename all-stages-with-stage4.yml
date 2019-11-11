@@ -15,7 +15,9 @@ stages:
     transformations:
       - createReport
       - sendReport
-
+  - name: commit
+    transformations:
+      - commitAndPush
 
 transformations:
   - name: checkoutCentralModel
@@ -31,6 +33,22 @@ transformations:
     parameters:
       repositoryUri: https://github.com/asab-se/projectEaRepository
       branch: master
+
+  - name: commitAndPush
+    service: git-service
+    command: commitAndPush
+    parameters:
+      artifactId: "@mergedModel"
+      approvalsReport: "@approvalsReport"
+      repositoryUri: https://github.com/asab-se/backupEaRepository
+      branch: master
+    dependsOn:
+      - alias: mergedModel
+        ref: p://this/transformations/mergeModels/mergedModel
+      - alias: approvalsReport
+        ref: p://this/assessments/collectApprovals/approvalsReport
+
+
 
   - name: alignModelData
     service: ea-model-evolution-service
