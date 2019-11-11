@@ -15,7 +15,7 @@ stages:
     transformations:
       - createReport
       - sendReport
-  - name: commit
+  - name: deploy
     transformations:
       - commitAndPush
 
