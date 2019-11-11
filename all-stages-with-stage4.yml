@@ -249,6 +249,8 @@ assessments:
     command: eamKpiCalculationAssessment
     parameters:
       checkedModel: "@changeSet"
+      syntaxCheckReport: "@syntaxCheck"
+      consistencyCheckReport: "@consistencyCheckReport"
       metricProperty:
         language: ArchiMate
         languageVersion: 3.0
@@ -356,12 +358,19 @@ assessments:
     dependsOn:
       - alias: changeSet
         ref: p://this/transformations/testAndAssessCheckout/changeSetArtifactId
+      - alias: syntaxCheckReport
+        ref: p://this/assessments/syntaxCheckAssessment/syntaxCheckReport
+      - alias: consistencyCheckReport
+        ref: p://this/assessments/consistencyCheckAssessment/consistencyCheckReport
 
   - name: mergedCalculateKpis
     service: ea-model-evolution-service
     command: eamKpiCalculationAssessment
     parameters:
       checkedModel: "@mergedModel"
+      syntaxCheckReport: "@syntaxCheckReport"
+      consistencyCheckReport: "@consistencyCheckReport"
+      disconnectedCheckReport: "@disconnectedReport"
       metricProperty:
         language: ArchiMate
         languageVersion: 3.0
@@ -469,6 +478,12 @@ assessments:
     dependsOn:
       - alias: mergedModel
         ref: p://this/transformations/mergeModels/mergedModel
+      - alias: syntaxCheckReport
+        ref: p://this/assessments/mergedSyntaxCheckAssessment/syntaxCheckReport
+      - alias: consistencyCheckReport
+        ref: p://this/assessments/mergedConsistencyCheckAssessment/consistencyCheckReport
+      - alias: disconnectedReport
+        ref: p://this/assessments/disconnectedComponentsCheck/disconnectedComponentsCheckReport
 
 qualityGates:
   - strategy: auto
