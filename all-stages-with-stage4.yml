@@ -42,9 +42,6 @@ transformations:
       approvalsReport: "@approvalsReport"
       repositoryUri: https://github.com/asab-se/backupEaRepository
       branch: master
-      credentials:
-        username: asab-se
-        password: asdf
     dependsOn:
       - alias: mergedModel
         ref: p://this/transformations/mergeModels/mergedModel
