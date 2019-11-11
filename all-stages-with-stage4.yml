@@ -24,7 +24,7 @@ transformations:
     service: git-service
     command: checkout
     parameters:
-      repositoryUri: https://github.com/asab-se/centralEaRepository
+      repositoryUri: https://github.com/asab-se/backupEaRepository
       branch: master
 
   - name: checkoutProjectDeviantModel
@@ -59,7 +59,7 @@ transformations:
     command: alignModelData
     parameters:
       projectDeviantArtifactId: "@projectDeviant"
-      threshold: "2"
+      threshold: "1"
     dependsOn:
       - alias: projectDeviant
         ref: p://this/transformations/checkoutProjectDeviantModel/workspace
