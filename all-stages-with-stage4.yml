@@ -349,7 +349,7 @@ qualityGates:
         assessmentRef: p://this/assessments/disconnectedComponentsCheck
 
       - name: VerifyApprovalRatio
-        interpretation: threshold+
+        interpretation: threshold-
         actualValue: approvalRatio
         setPoint: 100.0
         assessmentRef: p://this/assessments/assessApprovals
