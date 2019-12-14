@@ -170,7 +170,7 @@ transformations:
               - manager
             approveReport:
               - admin
-      skipMailSending: false
+      skipMailSending: true
     dependsOn:
       - alias: report
         ref: p://this/transformations/createReport/updateReport
@@ -255,10 +255,11 @@ assessments:
 
   - name: calculateKpis
     service: ea-model-evolution-service
-    command: eamKpiCalculationAssessment
+    command: eamKpiCalculation
     parameters:
       checkedModel: "@changeSet"
       configData: "@configData"
+      metricsFileName: change-set-metrics
     dependsOn:
       - alias: changeSet
         ref: p://this/transformations/testAndAssessCheckout/changeSetArtifactId
@@ -267,10 +268,11 @@ assessments:
 
   - name: mergedCalculateKpis
     service: ea-model-evolution-service
-    command: eamKpiCalculationAssessment
+    command: eamKpiCalculation
     parameters:
       checkedModel: "@mergedModel"
       configData: "@configData"
+      metricsFileName: merged-model-metrics
     dependsOn:
       - alias: mergedModel
         ref: p://this/transformations/mergeModels/mergedModel
