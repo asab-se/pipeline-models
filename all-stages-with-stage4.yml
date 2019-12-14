@@ -556,11 +556,11 @@ qualityGates:
         setPoint: 100.0
         assessmentRef: p://this/assessments/assessApprovals
 
-      - name: VerifyCriticalApprovals
-        interpretation: threshold-
-        actualValue: criticalApprovalsNotGiven
-        setPoint: 0
-        assessmentRef: p://this/assessments/assessApprovals
+      #- name: VerifyCriticalApprovals
+      #  interpretation: threshold-
+      #  actualValue: criticalApprovalsNotGiven
+      #  setPoint: 0
+      #  assessmentRef: p://this/assessments/assessApprovals
 
   #    - name: VerifyAverageMetrics
   #      interpretation: threshold-
