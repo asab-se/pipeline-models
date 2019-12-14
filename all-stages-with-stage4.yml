@@ -170,7 +170,7 @@ transformations:
               - manager
             approveReport:
               - admin
-      skipMailSending: true
+      skipMailSending: false
     dependsOn:
       - alias: report
         ref: p://this/transformations/createReport/updateReport
