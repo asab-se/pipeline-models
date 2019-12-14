@@ -3,6 +3,7 @@ stages:
     transformations:
       - checkoutCentralModel
       - checkoutProjectDeviantModel
+      - checkoutConfigData
       - alignModelData
       - computeChangeSet
   - name: testAndAssess
@@ -26,6 +27,13 @@ transformations:
     command: checkout
     parameters:
       repositoryUri: https://github.com/asab-se/backupEaRepository
+      branch: master
+
+  - name: checkoutConfigData
+    service: git-service
+    command: checkout
+    parameters:
+      repositoryUri: https://github.com/asab-se/config-repo
       branch: master
 
   - name: checkoutProjectDeviantModel
@@ -250,18 +258,24 @@ assessments:
     command: eamKpiCalculationAssessment
     parameters:
       checkedModel: "@changeSet"
+      configData: "@configData"
     dependsOn:
       - alias: changeSet
         ref: p://this/transformations/testAndAssessCheckout/changeSetArtifactId
+      - alias: configData
+        ref: p://this/transformations/checkoutConfigData/workspace
 
   - name: mergedCalculateKpis
     service: ea-model-evolution-service
     command: eamKpiCalculationAssessment
     parameters:
       checkedModel: "@mergedModel"
+      configData: "@configData"
     dependsOn:
       - alias: mergedModel
         ref: p://this/transformations/mergeModels/mergedModel
+      - alias: configData
+        ref: p://this/transformations/checkoutConfigData/workspace
 
   - name: assessApprovals
     service: report-approval-service
