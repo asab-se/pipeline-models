@@ -351,7 +351,7 @@ qualityGates:
       - name: VerifyApprovalRatio
         interpretation: threshold-
         actualValue: approvalRatio
-        setPoint: 100.0
+        setPoint: 1.0
         assessmentRef: p://this/assessments/assessApprovals
 
       - name: VerifyCriticalApprovals
