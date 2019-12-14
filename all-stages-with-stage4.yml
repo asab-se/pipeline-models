@@ -540,11 +540,11 @@ qualityGates:
         setPoint: 0.5
         assessmentRef: p://this/assessments/disconnectedComponentsCheck
 
-  #    - name: VerifyApprovalRatio
-  #      interpretation: threshold+
-  #      actualValue: approvalRatio
-  #      setPoint: 100.0
-  #      assessmentRef: p://this/assessments/assessApprovals
+      - name: VerifyApprovalRatio
+        interpretation: threshold+
+        actualValue: approvalRatio
+        setPoint: 100.0
+        assessmentRef: p://this/assessments/assessApprovals
 
       #- name: VerifyCriticalApprovals
       #  interpretation: threshold-
