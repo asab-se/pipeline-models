@@ -481,17 +481,17 @@ assessments:
       - alias: mergedModel
         ref: p://this/transformations/mergeModels/mergedModel
 
-  - name: assessApprovals
-    service: report-approval-service
-    command: assessApprovals
-    parameters:
-      reportDocument: "@reportDocument"
-      collectApprovalsArtifact: "@collectedApprovalsArtifact"
-    dependsOn:
-      - alias: reportDocument
-        ref: p://this/transformations/sendReport/reportDocument
-      - alias: collectedApprovalsArtifact
-        ref: p://this/transformations/collectApprovals/collectApprovalsArtifact
+#  - name: assessApprovals
+#    service: report-approval-service
+#    command: assessApprovals
+#    parameters:
+#      reportDocument: "@reportDocument"
+#      collectApprovalsArtifact: "@collectedApprovalsArtifact"
+#    dependsOn:
+#      - alias: reportDocument
+#        ref: p://this/transformations/sendReport/reportDocument
+#      - alias: collectedApprovalsArtifact
+#        ref: p://this/transformations/collectApprovals/collectApprovalsArtifact
 
 qualityGates:
   - strategy: auto
@@ -550,11 +550,11 @@ qualityGates:
         setPoint: 0.5
         assessmentRef: p://this/assessments/disconnectedComponentsCheck
 
-      - name: VerifyApprovalRatio
-        interpretation: threshold+
-        actualValue: approvalRatio
-        setPoint: 100.0
-        assessmentRef: p://this/assessments/assessApprovals
+  #    - name: VerifyApprovalRatio
+  #      interpretation: threshold+
+  #      actualValue: approvalRatio
+  #      setPoint: 100.0
+  #      assessmentRef: p://this/assessments/assessApprovals
 
       #- name: VerifyCriticalApprovals
       #  interpretation: threshold-
