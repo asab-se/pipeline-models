@@ -150,28 +150,26 @@ transformations:
     command: sendUpdateReport
     parameters:
       updateReport: "@report"
-      responsibility:
-        responsibilities:
-          - userMail: alex@asab-se.de
-            userRoles:
-              - project: ProjectA
-                role: admin
-              - project: ProjectB
-                role: manager
-          - userMail: alex.sabau@rwth-aachen.de
-            userRoles:
-              - project: ProjectA
-                role: manager
+      responsibilities:
+        - userMail: alex@asab-se.de
+          userRoles:
+            - project: ProjectA
+              role: admin
+            - project: ProjectB
+              role: manager
+        - userMail: alex.sabau@rwth-aachen.de
+          userRoles:
+            - project: ProjectA
+              role: manager
       receivers:
-        mailReceivers:
-          - project: ProjectA
-            receiveMail:
-              - admin
-              - manager
-            approveReport:
-              - admin
-            receiveMailUserMails:
-              - vegaaaa@gmx.de
+        - project: ProjectA
+          receiveMail:
+            - admin
+            - manager
+          approveReport:
+            - admin
+          receiveMailUserMails:
+            - vegaaaa@gmx.de
       skipMailSending: false
     dependsOn:
       - alias: report
