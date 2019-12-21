@@ -68,7 +68,7 @@ transformations:
     command: alignModelData
     parameters:
       projectDeviantArtifactId: "@projectDeviant"
-      threshold: "1"
+      threshold: "5"
     dependsOn:
       - alias: projectDeviant
         ref: p://this/transformations/checkoutProjectDeviantModel/workspace
@@ -116,7 +116,7 @@ transformations:
       alignedModel: "@aligned"
       changeSet: "@changeSet"
       mergedModel: "@merged"
-      syntaxCheckReport: "@changeSetSyntax"
+#      syntaxCheckReport: "@changeSetSyntax"
       mergedSyntaxCheckReport: "@mergedSyntax"
       consistencyCheckReport: "@changeSetConsistency"
       mergedConsistencyCheckReport:  "@mergedConsistency"
@@ -130,8 +130,8 @@ transformations:
         ref: p://this/assessments/artifactVerification/changeSet
       - alias: merged
         ref: p://this/transformations/mergeModels/mergedModel
-      - alias: changeSetSyntax
-        ref: p://this/assessments/syntaxCheckAssessment/syntaxCheckReport
+#      - alias: changeSetSyntax
+#        ref: p://this/assessments/syntaxCheckAssessment/syntaxCheckReport
       - alias: mergedSyntax
         ref: p://this/assessments/mergedSyntaxCheckAssessment/syntaxCheckReport
       - alias: changeSetConsistency
@@ -202,17 +202,17 @@ assessments:
       - alias: changeSet
         ref: p://this/transformations/computeChangeSet/changeSetArtifactId
 
-  - name: syntaxCheckAssessment
-    service: ea-model-evolution-service
-    command: syntaxCheckAssessment
-    parameters:
-      checkedModel: "@changeSet"
-      repoWithSchemaFile: "@projectModel"
-    dependsOn:
-      - alias: changeSet
-        ref: p://this/transformations/testAndAssessCheckout/changeSetArtifactId
-      - alias: projectModel
-        ref: p://this/transformations/checkoutProjectDeviantModel/workspace
+#  - name: syntaxCheckAssessment
+#    service: ea-model-evolution-service
+#    command: syntaxCheckAssessment
+#    parameters:
+#      checkedModel: "@changeSet"
+#      repoWithSchemaFile: "@projectModel"
+#    dependsOn:
+#      - alias: changeSet
+#        ref: p://this/transformations/testAndAssessCheckout/changeSetArtifactId
+#      - alias: projectModel
+#        ref: p://this/transformations/checkoutProjectDeviantModel/workspace
 
   - name: mergedSyntaxCheckAssessment
     service: ea-model-evolution-service
@@ -300,11 +300,11 @@ qualityGates:
         setPoint: 3
         assessmentRef: p://this/assessments/artifactVerification
 
-      - name: VerifySyntax
-        interpretation: threshold-
-        actualValue: isValid
-        setPoint: 0.5
-        assessmentRef: p://this/assessments/syntaxCheckAssessment
+#      - name: VerifySyntax
+#        interpretation: threshold-
+#        actualValue: isValid
+#        setPoint: 0.5
+#        assessmentRef: p://this/assessments/syntaxCheckAssessment
 
       - name: VerifyConsistency
         interpretation: threshold-
