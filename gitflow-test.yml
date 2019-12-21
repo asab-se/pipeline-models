@@ -150,6 +150,7 @@ transformations:
     command: sendUpdateReport
     parameters:
       updateReport: "@report"
+      configData: "@configData"
       responsibilitiesFileName: "user-responsibilities"
       receiversFileName: "mail-receivers"
 #      responsibilities:
@@ -176,6 +177,8 @@ transformations:
     dependsOn:
       - alias: report
         ref: p://this/transformations/createReport/updateReport
+      - alias: configData
+        ref: p://this/transformations/checkoutConfigData/workspace
 
   - name: collectApprovals
     service: report-approval-service
