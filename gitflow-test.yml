@@ -170,6 +170,8 @@ transformations:
               - manager
             approveReport:
               - admin
+            receiveMailUserMails:
+              - vegaaaa@gmx.de
       skipMailSending: false
     dependsOn:
       - alias: report
