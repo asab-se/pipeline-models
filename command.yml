@@ -1,0 +1,12 @@
+stages:
+  - name: prepareModelData
+    transformations:
+      - checkoutCentralModel
+
+transformations:
+  - name: checkoutCentralModel
+    service: git-service
+    command: checkout
+    parameters:
+      repositoryUri: https://github.com/asab-se/gitflow-test
+      branch: release
