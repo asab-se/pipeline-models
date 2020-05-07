@@ -12,6 +12,7 @@ stages:
   - name: evolve
     transformations:
       - mergeModels
+      - mergeGraphics
   - name: approve
     transformations:
       - createReport
@@ -108,6 +109,18 @@ transformations:
         ref: p://this/assessments/artifactVerification/changeSet
       - alias: metricsReportArtifact
         ref: p://this/assessments/calculateKpis/metricsReportArtifact
+
+  - name: mergeGraphics
+    service: ea-model-evolution-service
+    command: mergeModels
+    parameters:
+      mergedModel: "@mergedModel"
+      projectModel: "@projectModel"
+    dependsOn:
+      - alias: mergedModel
+        ref: p://this/transformations/mergeModels/mergedModel
+      - alias: projectModel
+        ref: p://this/transformations/checkoutProjectDeviantModel/workspace
 
   - name: createReport
     service: ea-model-evolution-service
