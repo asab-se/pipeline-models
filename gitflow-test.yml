@@ -112,7 +112,7 @@ transformations:
 
   - name: mergeGraphics
     service: ea-model-evolution-service
-    command: mergeModels
+    command: mergeGraphics
     parameters:
       mergedModel: "@mergedModel"
       projectModel: "@projectModel"
