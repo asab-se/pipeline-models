@@ -245,7 +245,7 @@ assessments:
       - alias: mergedModel
         ref: p://this/transformations/mergeModels/mergedModel
       - alias: projectModel
-        ref: p://this/transformations/checkoutCentralModel/workspace
+        ref: p://this/transformations/checkoutProjectDeviantModel/workspace
 
   - name: consistencyCheckAssessment
     service: ea-model-evolution-service
