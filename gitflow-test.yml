@@ -116,11 +116,14 @@ transformations:
     parameters:
       mergedModel: "@mergedModel"
       projectModel: "@projectModel"
+      alignedModel: "@alignedModel"
     dependsOn:
       - alias: mergedModel
         ref: p://this/transformations/mergeModels/mergedModel
       - alias: projectModel
         ref: p://this/transformations/checkoutProjectDeviantModel/workspace
+      - alias: alignedModel
+        ref: p://this/transformations/alignModelData/alignModelArtifactId
 
   - name: createReport
     service: ea-model-evolution-service
