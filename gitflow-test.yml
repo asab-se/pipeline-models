@@ -58,7 +58,7 @@ transformations:
         password: c66132e56c61cf8c8c2d91e5
     dependsOn:
       - alias: mergedModel
-        ref: p://this/transformations/mergeModels/mergedModel
+        ref: p://this/transformations/mergeGraphics/mergedModelWithGraphics
       - alias: approvalsReport
         ref: p://this/assessments/assessApprovals/approvalsReport
 
