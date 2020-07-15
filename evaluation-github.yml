@@ -28,21 +28,21 @@ transformations:
     command: checkout
     parameters:
       repositoryUri: https://github.com/asab-se/eval-test
-      branch: refs/remotes/origin/release
+      branch: release
 
   - name: checkoutConfigData
     service: git-service
     command: checkout
     parameters:
       repositoryUri: https://github.com/asab-se/eval-test
-      branch: refs/remotes/origin/config
+      branch: config
 
   - name: checkoutProjectModel
     service: git-service
     command: checkout
     parameters:
       repositoryUri: https://github.com/asab-se/eval-test
-      branch: refs/remotes/origin/develop
+      branch: develop
 
   - name: commitAndPush
     service: git-service
