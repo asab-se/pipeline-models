@@ -27,22 +27,34 @@ transformations:
     service: git-service
     command: checkout
     parameters:
-      repositoryUri: https://github.com/asab-se/eval-release.git
+      repositoryUri: https://git.rwth-aachen.de/eam-cd-evaluation/release
       branch: master
+      credentials:
+        type: plain
+        username: asab-se
+        password: c66132e56c61cf8c8c2d91e5
 
   - name: checkoutConfigData
     service: git-service
     command: checkout
     parameters:
-      repositoryUri: https://github.com/asab-se/eval-config.git
+      repositoryUri: https://git.rwth-aachen.de/eam-cd-evaluation/config
       branch: master
+      credentials:
+        type: plain
+        username: asab-se
+        password: c66132e56c61cf8c8c2d91e5
 
   - name: checkoutProjectModel
     service: git-service
     command: checkout
     parameters:
-      repositoryUri: https://github.com/asab-se/eval-develop.git
-      branch: develop
+      repositoryUri: https://git.rwth-aachen.de/eam-cd-evaluation/develop
+      branch: master
+      credentials:
+        type: plain
+        username: asab-se
+        password: c66132e56c61cf8c8c2d91e5
 
   - name: commitAndPush
     service: git-service
@@ -50,7 +62,7 @@ transformations:
     parameters:
       artifactId: "@mergedModel"
       approvalsReport: "@approvalsReport"
-      repositoryUri: https://github.com/asab-se/eval-release.git
+      repositoryUri: https://git.rwth-aachen.de/eam-cd-evaluation/release
       branch: master
       credentials:
         type: plain
