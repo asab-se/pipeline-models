@@ -27,22 +27,22 @@ transformations:
     service: git-service
     command: checkout
     parameters:
-      repositoryUri: https://github.com/asab-se/eval-test
-      branch: origin release
+      repositoryUri: https://github.com/asab-se/eval-release.git
+      branch: master
 
   - name: checkoutConfigData
     service: git-service
     command: checkout
     parameters:
-      repositoryUri: https://github.com/asab-se/eval-test
-      branch: origin config
+      repositoryUri: https://github.com/asab-se/eval-config.git
+      branch: master
 
   - name: checkoutProjectModel
     service: git-service
     command: checkout
     parameters:
-      repositoryUri: https://github.com/asab-se/eval-test
-      branch: origin develop
+      repositoryUri: https://github.com/asab-se/eval-develop.git
+      branch: master
 
   - name: commitAndPush
     service: git-service
@@ -50,8 +50,8 @@ transformations:
     parameters:
       artifactId: "@mergedModel"
       approvalsReport: "@approvalsReport"
-      repositoryUri: https://github.com/asab-se/eval-test
-      branch: release
+      repositoryUri: https://github.com/asab-se/eval-release.git
+      branch: master
       credentials:
         type: plain
         username: asab-se
