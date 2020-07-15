@@ -42,7 +42,7 @@ transformations:
     command: checkout
     parameters:
       repositoryUri: https://github.com/asab-se/eval-develop.git
-      branch: master
+      branch: develop
 
   - name: commitAndPush
     service: git-service
