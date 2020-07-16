@@ -179,7 +179,7 @@ transformations:
       configData: "@configData"
       responsibilitiesFileName: "user-responsibilities"
       receiversFileName: "mail-receivers"
-      skipMailSending: false
+      skipMailSending: true
     dependsOn:
       - alias: report
         ref: p://this/transformations/createReport/updateReport
