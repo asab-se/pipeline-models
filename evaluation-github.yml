@@ -331,19 +331,19 @@ qualityGates:
       - name: VerifyMergedBadMetrics
         interpretation: threshold+
         actualValue: numberOfBadKpis
-        setPoint: 1
+        setPoint: 1.1
         assessmentRef: p://this/assessments/mergedCalculateKpis
 
       - name: VerifyMergedAverageMetrics
         interpretation: threshold+
         actualValue: numberOfAverageKpis
-        setPoint: 2
+        setPoint: 2.1
         assessmentRef: p://this/assessments/mergedCalculateKpis
 
       - name: VerifyMergedCriticalMetrics
         interpretation: threshold+
         actualValue: numberOfCriticalKpis
-        setPoint: 0
+        setPoint: 0.1
         assessmentRef: p://this/assessments/mergedCalculateKpis
 
       - name: VerifyDisconnectedComponents
